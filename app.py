@@ -73,40 +73,61 @@ def analyze_sentiment(text):
 # Streamlit app
 st.title("Audio Transcription and Translation")
 
-uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3","opus"])
+# Terms and Conditions
+st.markdown(
+    """
+    **Terms and Conditions**
 
-# Get language names and codes from whisper.tokenizer.LANGUAGES
-language_options = list(whisper.tokenizer.LANGUAGES.items())
+    This application is provided for educational and research purposes only. 
+    By using this application, you agree to the following:
 
-# Display language names in the selectbox
-selected_language = st.selectbox(
-    "Select audio language", 
-    [lang[1] for lang in language_options]
+    * You are solely responsible for any and all use of this application.
+    * You will not use this application for any unauthorized or illegal purposes.
+    * The developers of this application are not liable for any damages or losses arising from your use of this application.
+    * This application is provided "as is" without any warranties, express or implied.
+
+    Please read these terms and conditions carefully before using this application.
+    """
 )
 
-# Find the corresponding language code for the selected language
-audio_language_code = next(
-    lang[0] for lang in language_options if lang[1] == selected_language
-)
+# Agreement checkbox
+if st.checkbox("I agree to the Terms and Conditions"):
+    uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3", "opus"])
 
-target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
+    # Get language names and codes from whisper.tokenizer.LANGUAGES
+    language_options = list(whisper.tokenizer.LANGUAGES.items())
 
-if uploaded_file is not None:
-    # Save the uploaded file temporarily
-    with open("temp_audio.ogg", "wb") as f:
-        f.write(uploaded_file.read())
+    # Display language names in the selectbox
+    selected_language = st.selectbox(
+        "Select audio language", 
+        [lang[1] for lang in language_options]
+    )
 
-    # Transcribe the audio
-    with st.spinner("Transcribing audio..."):
-        transcription = transcribe_audio("temp_audio.ogg", audio_language_code)
-    st.write("Transcription:", transcription)
+    # Find the corresponding language code for the selected language
+    audio_language_code = next(
+        lang[0] for lang in language_options if lang[1] == selected_language
+    )
 
-    # Translate the text
-    with st.spinner("Translating text..."):
-        translation = translate_text(transcription, target_language)
-    st.write("Translation:", translation)
+    target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
 
-    # Analyze sentiment
-    with st.spinner("Analyzing sentiment..."):
-        sentiment = analyze_sentiment(transcription)
-    st.write("Sentiment:", sentiment)
+    if uploaded_file is not None:
+        # Save the uploaded file temporarily
+        with open("temp_audio.ogg", "wb") as f:
+            f.write(uploaded_file.read())
+
+        # Transcribe the audio
+        with st.spinner("Transcribing audio..."):
+            transcription = transcribe_audio("temp_audio.ogg", audio_language_code)
+        st.write("Transcription:", transcription)
+
+        # Translate the text
+        with st.spinner("Translating text..."):
+            translation = translate_text(transcription, target_language)
+        st.write("Translation:", translation)
+
+        # Analyze sentiment
+        with st.spinner("Analyzing sentiment..."):
+            sentiment = analyze_sentiment(transcription)
+        st.write("Sentiment:", sentiment)
+else:
+    st.warning("Please accept the Terms and Conditions to proceed.")
