@@ -48,27 +48,6 @@ def translate_text(text, target_language):
     except Exception as e:
         return f"Error translating text: {e}"
 
-def analyze_sentiment(text):
-    """
-    Analyzes the sentiment of text using the OpenAI API.
-
-    Args:
-    text: The text to analyze.
-
-    Returns:
-    The sentiment of the text.
-    """
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that analyzes sentiment."},
-                {"role": "user", "content": f"Analyze the sentiment of the following text: {text}"}
-            ]
-        )
-        return response.choices[0].message['content']
-    except Exception as e:
-        return f"Error analyzing sentiment: {e}"
 
 # Streamlit app
 st.title("Audio Transcription and Translation")
@@ -126,9 +105,6 @@ if st.checkbox("I agree to the Terms and Conditions"):
             translation = translate_text(transcription, target_language)
         st.write("Translation:", translation)
 
-        # Analyze sentiment
-        with st.spinner("Analyzing sentiment..."):
-            sentiment = analyze_sentiment(transcription)
-        st.write("Sentiment:", sentiment)
+
 else:
     st.warning("Please accept the Terms and Conditions to proceed.")
