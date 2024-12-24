@@ -72,7 +72,7 @@ st.markdown(
 if st.checkbox("I agree to the Terms and Conditions"):
     uploaded_files = st.file_uploader("Upload audio files", type=["ogg", "wav", "mp3", "opus"], accept_multiple_files=True)
 
-    target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
+    target_language = st.selectbox("Select target language", ["English", "Bahasa Melayu", "Chinese", "Cantonese", "Tamil"])
 
     if uploaded_files:
         for uploaded_file in uploaded_files:
