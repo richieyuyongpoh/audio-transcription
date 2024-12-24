@@ -6,6 +6,7 @@ import whisper
 # Set your OpenAI API key
 openai.api_key = st.secrets["my_key"]
 
+
 def transcribe_audio(audio_file, language):
     """
     Transcribes audio using the OpenAI Whisper API.
@@ -73,7 +74,21 @@ def analyze_sentiment(text):
 st.title("Audio Transcription and Translation")
 
 uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3"])
-audio_language = st.selectbox("Select audio language", list(whisper.tokenizer.LANGUAGES.keys()))
+
+# Get language names and codes from whisper.tokenizer.LANGUAGES
+language_options = list(whisper.tokenizer.LANGUAGES.items())
+
+# Display language names in the selectbox
+selected_language = st.selectbox(
+    "Select audio language", 
+    [lang[1] for lang in language_options]
+)
+
+# Find the corresponding language code for the selected language
+audio_language_code = next(
+    lang[0] for lang in language_options if lang[1] == selected_language
+)
+
 target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
 
 if uploaded_file is not None:
@@ -83,7 +98,7 @@ if uploaded_file is not None:
 
     # Transcribe the audio
     with st.spinner("Transcribing audio..."):
-        transcription = transcribe_audio("temp_audio.ogg", audio_language)
+        transcription = transcribe_audio("temp_audio.ogg", audio_language_code)
     st.write("Transcription:", transcription)
 
     # Translate the text
