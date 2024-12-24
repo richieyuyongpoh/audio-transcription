@@ -108,8 +108,19 @@ if st.checkbox("I agree to the Terms and Conditions"):
 else:
     st.warning("Please accept the Terms and Conditions to proceed.")
 
-st.markdown("<br>", unsafe_allow_html=True)  # Add some space
-st.markdown("Designed by Richie Yu Yong Poh")
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown(
+    """
+    <div style="text-align: center; font-style: italic; color: #808080;">
+        Designed by Richie Yu Yong Poh
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 
