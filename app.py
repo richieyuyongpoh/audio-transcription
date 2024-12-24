@@ -87,4 +87,22 @@ if st.checkbox("I agree to the Terms and Conditions"):
             st.write(f"**Transcription of {uploaded_file.name}:**", transcription)
 
             # Translate the text
-            with
+            with st.spinner("Translating text..."):
+                translation = translate_text(transcription, target_language)
+            st.write("**Translation:**", translation)
+
+else:
+    st.warning("Please accept the Terms and Conditions to proceed.")
+
+st.markdown("<br>", unsafe_allow_html=True) 
+st.markdown(
+    """
+    <div style="text-align: center; font-style: italic; 
+                 background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); 
+                 -webkit-background-clip: text;
+                 -webkit-text-fill-color: transparent;">
+        Designed by Richie Yu Yong Poh
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
