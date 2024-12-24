@@ -1,26 +1,25 @@
 import openai
 import streamlit as st
-import tempfile 
+import tempfile
 
 import whisper
 
 # Set your OpenAI API key
 openai.api_key = st.secrets["my_key"]  # Uncomment and replace "my_key"
 
-def transcribe_audio(audio_file, languages):
+def transcribe_audio(audio_file):
     """
     Transcribes audio using the OpenAI Whisper API.
 
     Args:
         audio_file: The audio file to transcribe.
-        languages: A list of language codes.
 
     Returns:
         The transcribed text.
     """
     try:
         with open(audio_file, "rb") as f:
-            transcript = openai.Audio.transcribe("whisper-1", f, language=languages)
+            transcript = openai.Audio.transcribe("whisper-1", f)  # No language specified
         return transcript.text
     except Exception as e:
         return f"Error transcribing audio: {e}"
@@ -73,20 +72,6 @@ st.markdown(
 if st.checkbox("I agree to the Terms and Conditions"):
     uploaded_files = st.file_uploader("Upload audio files", type=["ogg", "wav", "mp3", "opus"], accept_multiple_files=True)
 
-    # Get language names and codes from whisper.tokenizer.LANGUAGES
-    language_options = list(whisper.tokenizer.LANGUAGES.items())
-
-    # Allow multiple language selection
-    selected_languages = st.multiselect(
-        "Select audio language(s)", 
-        [lang[1] for lang in language_options]
-    )
-
-    # Get corresponding language codes
-    audio_language_codes = [
-        lang[0] for lang in language_options if lang[1] in selected_languages
-    ]
-
     target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
 
     if uploaded_files:
@@ -96,28 +81,10 @@ if st.checkbox("I agree to the Terms and Conditions"):
                 temp_audio.write(uploaded_file.read())
                 temp_audio_path = temp_audio.name
 
-            # Transcribe the audio with multiple languages
+            # Transcribe the audio 
             with st.spinner(f"Transcribing {uploaded_file.name}..."):
-                transcription = transcribe_audio(temp_audio_path, audio_language_codes)
+                transcription = transcribe_audio(temp_audio_path)  # No language argument
             st.write(f"**Transcription of {uploaded_file.name}:**", transcription)
 
             # Translate the text
-            with st.spinner("Translating text..."):
-                translation = translate_text(transcription, target_language)
-            st.write("**Translation:**", translation)
-
-else:
-    st.warning("Please accept the Terms and Conditions to proceed.")
-
-st.markdown("<br>", unsafe_allow_html=True) 
-st.markdown(
-    """
-    <div style="text-align: center; font-style: italic; 
-                 background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); 
-                 -webkit-background-clip: text;
-                 -webkit-text-fill-color: transparent;">
-        Designed by Richie Yu Yong Poh
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+            with
