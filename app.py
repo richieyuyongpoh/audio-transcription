@@ -73,7 +73,7 @@ def analyze_sentiment(text):
 st.title("Audio Transcription and Translation")
 
 uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3"])
-audio_language = st.selectbox("Select audio language", whisper.available_languages())
+audio_language = st.selectbox("Select audio language", list(whisper.tokenizer.LANGUAGES.keys()))
 target_language = st.selectbox("Select target language", ["English", "French", "Spanish", "German", "Chinese"])
 
 if uploaded_file is not None:
