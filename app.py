@@ -115,12 +115,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True) 
 st.markdown(
     """
-    <div style="text-align: center; font-style: italic; color: #808080;">
+    <div style="text-align: center; font-style: italic; 
+                background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); 
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;">
         Designed by Richie Yu Yong Poh
     </div>
     """,
     unsafe_allow_html=True,
 )
-
 
 
