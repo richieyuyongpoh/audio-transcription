@@ -73,7 +73,7 @@ def analyze_sentiment(text):
 # Streamlit app
 st.title("Audio Transcription and Translation")
 
-uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3"])
+uploaded_file = st.file_uploader("Upload an audio file", type=["ogg", "wav", "mp3","opus"])
 
 # Get language names and codes from whisper.tokenizer.LANGUAGES
 language_options = list(whisper.tokenizer.LANGUAGES.items())
