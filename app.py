@@ -51,26 +51,42 @@ def translate_text(text, target_language):
 # Streamlit app
 st.title("Audio Transcription and Translation")
 
-# Terms and Conditions
-st.markdown(
-    """
-    **Terms and Conditions**
+# Terms and Conditions text
+tnc_text = """
+**Terms and Conditions**
 
-    This application is provided for educational and research purposes only. 
-    By using this application, you agree to the following:
+This application is provided for educational and research purposes only. 
+By using this application, you agree to the following:
 
-    * You are solely responsible for any and all use of this application.
-    * You will not use this application for any unauthorized or illegal purposes.
-    * The developers of this application are not liable for any damages or losses arising from your use of this application.
-    * This application is provided "as is" without any warranties, express or implied.
-    * The audio transcription feature utilizes artificial intelligence, which may produce inaccurate results. You are responsible for reviewing and verifying the accuracy of any transcriptions.
+* You are solely responsible for any and all use of this application.
+* You will not use this application for any unauthorized or illegal purposes.
+* The developers of this application are not liable for any damages or losses arising from your use of this application.
+* This application is provided "as is" without any warranties, express or implied.
+* The audio transcription feature utilizes artificial intelligence, which may produce inaccurate results. You are responsible for reviewing and verifying the accuracy of any transcriptions.
 
-    Please read these terms and conditions carefully before using this application.
-    """
-)
+Please read these terms and conditions carefully before using this application.
+"""
+
+# # Terms and Conditions
+# st.markdown(
+#     """
+#     **Terms and Conditions**
+
+#     This application is provided for educational and research purposes only. 
+#     By using this application, you agree to the following:
+
+#     * You are solely responsible for any and all use of this application.
+#     * You will not use this application for any unauthorized or illegal purposes.
+#     * The developers of this application are not liable for any damages or losses arising from your use of this application.
+#     * This application is provided "as is" without any warranties, express or implied.
+#     * The audio transcription feature utilizes artificial intelligence, which may produce inaccurate results. You are responsible for reviewing and verifying the accuracy of any transcriptions.
+
+#     Please read these terms and conditions carefully before using this application.
+#     """
+# )
 
 # Agreement checkbox
-if st.checkbox("I agree to the Terms and Conditions"):
+if st.checkbox("I agree to the [Terms and Conditions](#terms-and-conditions)"):
     uploaded_files = st.file_uploader("Upload audio files", type=["ogg", "wav", "mp3", "opus"], accept_multiple_files=True)
 
     # Get language names and codes from whisper.tokenizer.LANGUAGES
@@ -107,6 +123,9 @@ if st.checkbox("I agree to the Terms and Conditions"):
 
 else:
     st.warning("Please accept the Terms and Conditions to proceed.")
+
+# Display the full T&C text with an anchor tag
+st.markdown(f"<a id='terms-and-conditions'>{tnc_text}</a>", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True) 
 st.markdown("<br>", unsafe_allow_html=True) 
