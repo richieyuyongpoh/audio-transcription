@@ -209,7 +209,7 @@ else:
 #         st.write("Translation:", translation)
 
 
-else:
-    st.warning("Please accept the Terms and Conditions to proceed.")
+# else:
+#     st.warning("Please accept the Terms and Conditions to proceed.")
 
 
