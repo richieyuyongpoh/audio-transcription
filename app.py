@@ -62,7 +62,7 @@ st.markdown(
     * You will not use this application for any unauthorized or illegal purposes.
     * The developers of this application are not liable for any damages or losses arising from your use of this application.
     * This application is provided "as is" without any warranties, express or implied.
-    * The audio transcription feature utilizes artificial intelligence, which may produce inaccurate results. You are responsible for reviewing and verifying the accuracy of any transcriptions.
+    * The audio transcription and translation feature utilizes artificial intelligence, which may produce inaccurate results. You are responsible for reviewing and verifying the accuracy of any transcriptions.
 
     Please read these terms and conditions carefully before using this application.
     """
