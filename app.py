@@ -70,7 +70,7 @@ st.markdown(
 
 # Agreement checkbox
 if st.checkbox("I agree to the Terms and Conditions"):
-    uploaded_files = st.file_uploader("Upload audio files", type=["ogg", "wav", "mp3", "opus"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Upload audio files", type=["ogg", "wav", "mp3", "opus","oga"], accept_multiple_files=True)
 
     target_language = st.selectbox("Select target language", ["English", "Bahasa Melayu", "Chinese", "Cantonese", "Tamil"])
 
