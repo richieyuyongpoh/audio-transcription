@@ -72,7 +72,7 @@ st.markdown(
 if st.checkbox("I agree to the Terms and Conditions"):
     uploaded_files = st.file_uploader("Upload audio files", type=["oga","ogg", "wav", "mp3", "opus","m4a"], accept_multiple_files=True)
 
-    target_language = st.selectbox("Select target language", ["English", "Bahasa Melayu", "Chinese", "Cantonese", "Tamil"])
+    target_language = st.selectbox("Select target language", ["English", "Bahasa Melayu", "Chinese", "Cantonese", "Tamil","Hokkien"])
 
     if uploaded_files:
         for uploaded_file in uploaded_files:
@@ -80,7 +80,7 @@ if st.checkbox("I agree to the Terms and Conditions"):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".ogg") as temp_audio:
                 temp_audio.write(uploaded_file.read())
                 temp_audio_path = temp_audio.name
-
+                st.write(temp_audio_path)
 
             # Sanitize filename for display
             display_filename = uploaded_file.name.replace(",", "_") 
