@@ -81,10 +81,19 @@ if st.checkbox("I agree to the Terms and Conditions"):
                 temp_audio.write(uploaded_file.read())
                 temp_audio_path = temp_audio.name
 
+
+            # Sanitize filename for display
+            display_filename = uploaded_file.name.replace(",", "_") 
+
             # Transcribe the audio 
-            with st.spinner(f"Transcribing {uploaded_file.name}..."):
-                transcription = transcribe_audio(temp_audio_path)  # No language argument
-            st.write(f"**Transcription of {uploaded_file.name}:**", transcription)
+            with st.spinner(f"Transcribing {display_filename}..."):
+                transcription = transcribe_audio(temp_audio_path)  
+            st.write(f"**Transcription of {display_filename}:**", transcription)
+
+            # # Transcribe the audio 
+            # with st.spinner(f"Transcribing {uploaded_file.name}..."):
+            #     transcription = transcribe_audio(temp_audio_path)  # No language argument
+            # st.write(f"**Transcription of {uploaded_file.name}:**", transcription)
 
             # Translate the text
             with st.spinner("Translating text..."):
